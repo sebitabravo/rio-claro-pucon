@@ -23,6 +23,7 @@ export default function Dashboard() {
   const router = useRouter()
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedSensor, setSelectedSensor] = useState("sensor-1")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Actualizar tiempo cada segundo
   useEffect(() => {
@@ -151,41 +152,69 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <img
               src="/images/gobierno-logo.jpeg"
               alt="Ministerio del Medio Ambiente"
-              className="w-10 h-8 object-contain"
+              className="w-8 h-6 sm:w-10 sm:h-8 object-contain"
             />
             <div>
-              <h1 className="text-xl font-semibold">Sistema de Monitoreo Río Claro</h1>
-              <p className="text-sm text-gray-500">
+              <h1 className="text-lg sm:text-xl font-semibold">Sistema de Monitoreo Río Claro</h1>
+              <p className="text-xs sm:text-sm text-gray-500">
                 Ministerio del Medio Ambiente • {currentTime.toLocaleString("es-CL")}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Badge variant="outline" className="flex items-center gap-1">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Badge variant="outline" className="hidden sm:flex items-center gap-1 text-xs">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               Sistema Activo
             </Badge>
-            <Button variant="outline" size="sm" onClick={() => handleNavigation("/alerts")}>
-              <Bell className="w-4 h-4 mr-2" />
-              Alertas ({criticalCount + warningCount})
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleNavigation("/alerts")}
+              className="text-xs sm:text-sm"
+            >
+              <Bell className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Alertas</span> ({criticalCount + warningCount})
             </Button>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4 mr-2" />
-              Salir
+            <Button variant="outline" size="sm" onClick={handleLogout} className="text-xs sm:text-sm bg-transparent">
+              <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Salir</span>
             </Button>
           </div>
         </div>
       </header>
 
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-gray-200 min-h-screen p-4">
+        {/* Mobile Menu Button - Improved Design */}
+        <div className="lg:hidden fixed top-20 left-4 z-50">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="bg-white shadow-lg border-2 border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 rounded-lg p-2"
+          >
+            <div className="flex flex-col space-y-1">
+              <div
+                className={`w-5 h-0.5 bg-blue-600 transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+              ></div>
+              <div
+                className={`w-5 h-0.5 bg-blue-600 transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`}
+              ></div>
+              <div
+                className={`w-5 h-0.5 bg-blue-600 transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+              ></div>
+            </div>
+            <span className="sr-only">Abrir menú</span>
+          </Button>
+        </div>
+
+        {/* Sidebar - Desktop */}
+        <aside className="hidden lg:block w-64 bg-white border-r border-gray-200 min-h-screen p-4">
           <nav className="space-y-2">
             <Button variant="default" className="w-full justify-start">
               <Activity className="w-4 h-4 mr-2" />
@@ -214,10 +243,48 @@ export default function Dashboard() {
           </nav>
         </aside>
 
+        {/* Mobile Sidebar Overlay */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)}>
+            <aside className="w-64 bg-white h-full p-4">
+              <nav className="space-y-2">
+                <Button variant="default" className="w-full justify-start">
+                  <Activity className="w-4 h-4 mr-2" />
+                  Dashboard
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => handleNavigation("/map")}>
+                  <MapPin className="w-4 h-4 mr-2" />
+                  Mapa del Río Claro
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={() => handleNavigation("/statistics")}
+                >
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  Estadísticas
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => handleNavigation("/alerts")}>
+                  <AlertTriangle className="w-4 h-4 mr-2" />
+                  Alertas ({criticalCount + warningCount})
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => handleNavigation("/settings")}>
+                  <Settings className="w-4 h-4 mr-2" />
+                  Configuración
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => handleNavigation("/users")}>
+                  <Users className="w-4 h-4 mr-2" />
+                  Usuarios
+                </Button>
+              </nav>
+            </aside>
+          </div>
+        )}
+
         {/* Main Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-6 lg:ml-0">
           {/* Resumen General */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-4 sm:mb-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Sensores Activos</CardTitle>
@@ -269,7 +336,7 @@ export default function Dashboard() {
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {/* Mapa del Río Claro */}
             <Card className="lg:col-span-1">
               <CardHeader>

@@ -56,20 +56,20 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="outline" size="sm" onClick={handleBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Volver</span>
             </Button>
             <div>
-              <h1 className="text-xl font-semibold">Configuración - Río Claro</h1>
-              <p className="text-sm text-gray-500">Ajustes del sistema de monitoreo</p>
+              <h1 className="text-lg sm:text-xl font-semibold">Configuración - Río Claro</h1>
+              <p className="text-xs sm:text-sm text-gray-500">Ajustes del sistema de monitoreo</p>
             </div>
           </div>
-          <Button onClick={handleSave} disabled={saved}>
-            <Save className="w-4 h-4 mr-2" />
+          <Button onClick={handleSave} disabled={saved} className="text-xs sm:text-sm">
+            <Save className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             {saved ? "Guardado ✓" : "Guardar Cambios"}
           </Button>
         </div>
@@ -336,17 +336,17 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="pt-4 border-t">
-                  <div className="flex gap-4">
-                    <Button variant="outline">
-                      <Database className="w-4 h-4 mr-2" />
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                    <Button variant="outline" className="text-xs sm:text-sm bg-transparent">
+                      <Database className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                       Respaldar Datos del Río
                     </Button>
-                    <Button variant="outline">
-                      <Monitor className="w-4 h-4 mr-2" />
+                    <Button variant="outline" className="text-xs sm:text-sm bg-transparent">
+                      <Monitor className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                       Diagnóstico del Sistema
                     </Button>
-                    <Button variant="outline">
-                      <RefreshCw className="w-4 h-4 mr-2" />
+                    <Button variant="outline" className="text-xs sm:text-sm bg-transparent">
+                      <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                       Reiniciar Servicios
                     </Button>
                   </div>

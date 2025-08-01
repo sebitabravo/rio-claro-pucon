@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Activity, MapPin, BarChart3, AlertTriangle, Settings, Users } from "lucide-react"
+import { Activity, MapPin, BarChart3, AlertTriangle, Settings, Users, Database, Radio, Download } from "lucide-react"
 
 export function Navigation() {
   const pathname = usePathname()
@@ -13,6 +13,9 @@ export function Navigation() {
     { href: "/map", label: "Mapa", icon: MapPin },
     { href: "/statistics", label: "Estadísticas", icon: BarChart3 },
     { href: "/alerts", label: "Alertas", icon: AlertTriangle },
+    { href: "/variables", label: "Variables", icon: Database },
+    { href: "/stations", label: "Estaciones", icon: Radio },
+    { href: "/export", label: "Exportar", icon: Download },
     { href: "/settings", label: "Configuración", icon: Settings },
     { href: "/users", label: "Usuarios", icon: Users },
   ]

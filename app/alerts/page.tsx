@@ -87,26 +87,26 @@ export default function AlertsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="outline" size="sm" onClick={handleBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Volver</span>
             </Button>
             <div>
-              <h1 className="text-xl font-semibold">Sistema de Alertas - Río Claro</h1>
-              <p className="text-sm text-gray-500">Ministerio del Medio Ambiente - Gestión de alertas</p>
+              <h1 className="text-lg sm:text-xl font-semibold">Sistema de Alertas - Río Claro</h1>
+              <p className="text-xs sm:text-sm text-gray-500">Ministerio del Medio Ambiente - Gestión de alertas</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Badge variant="destructive" className="flex items-center gap-1">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Badge variant="destructive" className="flex items-center gap-1 text-xs">
               <AlertTriangle className="w-3 h-3" />
               {criticalCount + warningCount} Alertas Activas
             </Badge>
-            <Button variant="outline" size="sm">
-              <Settings className="w-4 h-4 mr-2" />
-              Configurar
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm bg-transparent">
+              <Settings className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Configurar</span>
             </Button>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function AlertsPage() {
 
           <TabsContent value="active" className="space-y-6">
             {/* Resumen de Alertas del Río Claro */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Alertas Críticas</CardTitle>
@@ -196,27 +196,26 @@ export default function AlertsPage() {
                             {alert.acknowledged && <p className="text-xs text-green-600 mt-1">✓ Reconocida</p>}
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge
-                            variant={
-                              alert.level === "critical"
-                                ? "destructive"
-                                : alert.level === "warning"
-                                  ? "secondary"
-                                  : "default"
-                            }
-                          >
-                            {alert.level === "critical" ? "CRÍTICO" : alert.level === "warning" ? "ALERTA" : "NORMAL"}
-                          </Badge>
+                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-2">
                           {!alert.acknowledged && (
-                            <Button size="sm" variant="outline" onClick={() => handleAcknowledge(alert.id)}>
-                              <CheckCircle className="w-4 h-4 mr-1" />
-                              Reconocer
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleAcknowledge(alert.id)}
+                              className="text-xs"
+                            >
+                              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                              <span className="hidden sm:inline">Reconocer</span>
                             </Button>
                           )}
-                          <Button size="sm" variant="outline" onClick={() => handleViewDetails(alert.id)}>
-                            <Eye className="w-4 h-4 mr-1" />
-                            Ver Detalles
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleViewDetails(alert.id)}
+                            className="text-xs"
+                          >
+                            <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                            <span className="hidden sm:inline">Ver</span> Detalles
                           </Button>
                         </div>
                       </div>

@@ -72,21 +72,21 @@ export default function Statistics() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="outline" size="sm" onClick={handleBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Volver</span>
             </Button>
             <div>
-              <h1 className="text-xl font-semibold">Estadísticas del Río Claro</h1>
-              <p className="text-sm text-gray-500">Ministerio del Medio Ambiente - Análisis histórico</p>
+              <h1 className="text-lg sm:text-xl font-semibold">Estadísticas del Río Claro</h1>
+              <p className="text-xs sm:text-sm text-gray-500">Ministerio del Medio Ambiente - Análisis histórico</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Select defaultValue="7days">
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-32 sm:w-40 text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -96,9 +96,9 @@ export default function Statistics() {
                 <SelectItem value="3months">Últimos 3 meses</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="outline" size="sm" onClick={handleExport}>
-              <Download className="w-4 h-4 mr-2" />
-              Exportar
+            <Button variant="outline" size="sm" onClick={handleExport} className="text-xs sm:text-sm bg-transparent">
+              <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Exportar</span>
             </Button>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function Statistics() {
 
           <TabsContent value="overview" className="space-y-6">
             {/* Métricas del Río Claro */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Nivel Máximo</CardTitle>
@@ -162,7 +162,7 @@ export default function Statistics() {
             </div>
 
             {/* Gráficos del Río Claro */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle>Niveles por Sector - Río Claro</CardTitle>

@@ -141,21 +141,21 @@ export default function MapPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="outline" size="sm" onClick={handleBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Volver</span>
             </Button>
             <div>
-              <h1 className="text-xl font-semibold">Mapa Interactivo - Río Claro</h1>
-              <p className="text-sm text-gray-500">Ministerio del Medio Ambiente - Vista geográfica</p>
+              <h1 className="text-lg sm:text-xl font-semibold">Mapa Interactivo - Río Claro</h1>
+              <p className="text-xs sm:text-sm text-gray-500">Ministerio del Medio Ambiente - Vista geográfica</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Select value={selectedSensor} onValueChange={setSelectedSensor}>
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-40 sm:w-48 text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -171,9 +171,9 @@ export default function MapPage() {
       </header>
 
       <div className="p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
           {/* Mapa Principal */}
-          <Card className="lg:col-span-2">
+          <Card className="xl:col-span-2">
             <CardHeader>
               <CardTitle>Mapa del Río Claro</CardTitle>
               <CardDescription>Distribución de sensores a lo largo de los 45 km del río</CardDescription>
@@ -322,7 +322,7 @@ export default function MapPage() {
             <CardDescription>Vista general de todos los puntos de monitoreo</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
               {rioClaro.sensors.map((sensor) => (
                 <div
                   key={sensor.id}
